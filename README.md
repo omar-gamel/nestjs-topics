@@ -36,13 +36,6 @@ A pipe is a class annotated with the <b>@Injectable()</b> decorator, which imple
 
 ![Pipes](https://github.com/omar-gamel/nestjs-topics/blob/main/Pipes.PNG)
 
-ads via Carbon
-Design and Development tips in your inbox. Every weekday.
-ADS VIA CARBON
-Pipes
-A pipe is a class annotated with the @Injectable() decorator, which implements the PipeTransform interface.
-
-
 Pipes have two typical use cases:
 
 - <b>transformation:</b> transform input data to the desired form (e.g., from string to integer)
@@ -51,3 +44,41 @@ Pipes have two typical use cases:
 In both cases, pipes operate on the <b>arguments</b> being processed by a <b>controller route handler.</b> Nest interposes a pipe just before a method is invoked, and the pipe receives the arguments destined for the method and operates on them. Any transformation or validation operation takes place at that time, after which the route handler is invoked with any (potentially) transformed arguments.
 
 Nest comes with a number of built-in pipes that you can use out-of-the-box. You can also build your own custom pipes. In this chapter, we'll introduce the built-in pipes and show how to bind them to route handlers. We'll then examine several custom-built pipes to show how you can build one from scratch.
+
+# Guards
+
+A guard is a class annotated with the <b>@Injectable()</b> decorator, which implements the <b>CanActivate</b> interface.
+
+![Guards](https://github.com/omar-gamel/nestjs-topics/blob/main/Guards.PNG)
+
+Guards have a <b>single responsibility.</b> They determine whether a given request will be handled by the route handler or not, depending on certain conditions (like permissions, roles, ACLs, etc.) present at run-time. This is often referred to as <b>authorization.</b> Authorization (and its cousin, <b>authentication,</b> with which it usually collaborates) has typically been handled by <b>middleware</b> in traditional Express applications. Middleware is a fine choice for authentication, since things like token validation and attaching properties to the <b>request</b> object are not strongly connected with a particular route context (and its metadata).
+
+But middleware, by its nature, is dumb. It doesn't know which handler will be executed after calling the <b>next()</b> function. On the other hand, <b>Guards</b> have access to the <b>ExecutionContext</b> instance, and thus know exactly what's going to be executed next. They're designed, much like exception filters, pipes, and interceptors, to let you interpose processing logic at exactly the right point in the request/response cycle, and to do so declaratively. This helps keep your code DRY and declarative.
+
+<h3>HINT</h3>
+Guards are executed <b>after</b>b all middleware, but <b>before</b> any interceptor or pipe.
+
+# Interceptors
+
+An interceptor is a class annotated with the <b>@Injectable()</b> decorator and implements the <b>NestInterceptor</b> interface.
+
+![Interceptors](https://github.com/omar-gamel/nestjs-topics/blob/main/Interceptors.PNG)
+
+ads via Carbon
+Design and Development tips in your inbox. Every weekday.
+ADS VIA CARBON
+Interceptors
+An interceptor is a class annotated with the @Injectable() decorator and implements the NestInterceptor interface.
+
+
+Interceptors have a set of useful capabilities which are inspired by the <b>Aspect Oriented Programming</b> (AOP) technique. They make it possible to:
+
+- bind extra logic before / after method execution
+- transform the result returned from a function
+- transform the exception thrown from a function
+- extend the basic function behavior
+- completely override a function depending on specific conditions (e.g., for caching purposes)
+
+
+
+
