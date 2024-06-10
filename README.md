@@ -56,20 +56,13 @@ Guards have a <b>single responsibility.</b> They determine whether a given reque
 But middleware, by its nature, is dumb. It doesn't know which handler will be executed after calling the <b>next()</b> function. On the other hand, <b>Guards</b> have access to the <b>ExecutionContext</b> instance, and thus know exactly what's going to be executed next. They're designed, much like exception filters, pipes, and interceptors, to let you interpose processing logic at exactly the right point in the request/response cycle, and to do so declaratively. This helps keep your code DRY and declarative.
 
 <h3>HINT</h3>
-Guards are executed <b>after</b>b all middleware, but <b>before</b> any interceptor or pipe.
+Guards are executed <b>after</b> all middleware, but <b>before</b> any interceptor or pipe.
 
 # Interceptors
 
 An interceptor is a class annotated with the <b>@Injectable()</b> decorator and implements the <b>NestInterceptor</b> interface.
 
 ![Interceptors](https://github.com/omar-gamel/nestjs-topics/blob/main/Interceptors.PNG)
-
-ads via Carbon
-Design and Development tips in your inbox. Every weekday.
-ADS VIA CARBON
-Interceptors
-An interceptor is a class annotated with the @Injectable() decorator and implements the NestInterceptor interface.
-
 
 Interceptors have a set of useful capabilities which are inspired by the <b>Aspect Oriented Programming</b> (AOP) technique. They make it possible to:
 
